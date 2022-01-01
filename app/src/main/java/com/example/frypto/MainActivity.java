@@ -11,6 +11,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.frypto.databinding.ActivityMainBinding;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,24 +24,17 @@ public class MainActivity extends AppCompatActivity {
 
     ListView superListView;
 
-    Button call;
-    TextView res;
-
-    String r;
+    ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        getSuperHeroes();
 
-        superListView = findViewById(R.id.superListView);
-        call = findViewById(R.id.call);
-        res = findViewById(R.id.res);
-        call.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                getSuperHeroes();
-                res.setText(r);
-            }});
+        superListView = findViewById(R.id.coinsList);
+
     }
 
     private void getSuperHeroes() {
@@ -49,18 +44,13 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<Results> call, Response<Results> response) {
                 Results result = response.body();
                 ArrayList<Coin> coinsList = result.getCoins();
-                String[] oneHeroes = new String[coinsList.size()];
-
-                for (int i = 0; i < coinsList.size(); i++) {
-                    oneHeroes[i] = coinsList.get(i).getName();
-                    System.out.println(oneHeroes[i]);
-                }
-
-                superListView.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, oneHeroes));
+                ListAdapter listAdapter = new ListAdapter(MainActivity.this,coinsList);
+                superListView.setAdapter(listAdapter);
             }
 
             @Override
             public void onFailure(Call<Results> call, Throwable t) {
+                System.out.println(t.toString());
                 Toast.makeText(getApplicationContext(), "An error has occured", Toast.LENGTH_LONG).show();
             }
 

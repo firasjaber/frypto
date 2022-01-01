@@ -7,20 +7,8 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/call"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Call api" />
-
-    <TextView
-        android:id="@+id/res"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="res" />
-
     <ListView
-        android:id="@+id/superListView"
+        android:id="@+id/coinsList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
