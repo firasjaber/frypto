@@ -11,12 +11,23 @@ public class Coin {
     private String coinPrice;
     @SerializedName("icon")
     private String coinIcon;
+    @SerializedName("marketCap")
+    private String coinMC;
 
-    public Coin(String coinName, String coinSymbol, String coinPrice, String coinIcon) {
+
+    @SerializedName("priceChange1h")
+    private String coinPriceChange;
+    @SerializedName("websiteUrl")
+    private String coinWebsite;
+
+    public Coin(String coinName, String coinSymbol, String coinPrice, String coinIcon, String coinMC, String coinPriceChange,String coinWebsite) {
         this.coinName = coinName;
         this.coinSymbol = coinSymbol;
         this.coinPrice = coinPrice;
         this.coinIcon = coinIcon;
+        this.coinMC = coinMC;
+        this.coinPriceChange = coinPriceChange;
+        this.coinWebsite = coinWebsite;
     }
 
     public String getCoinName() {
@@ -49,5 +60,29 @@ public class Coin {
 
     public void setCoinIcon(String coinIcon) {
         this.coinIcon = coinIcon;
+    }
+
+    public String getCoinMC() {
+        return coinMC;
+    }
+
+    public void setCoinMC(String coinMC) {
+        this.coinMC = coinMC;
+    }
+
+    public String getCoinPriceChange() {
+        return coinPriceChange;
+    }
+
+    public void setCoinPriceChange(String coinPriceChange) {
+        this.coinPriceChange = coinPriceChange;
+    }
+
+    public String getCoinWebsite() {
+        return coinWebsite;
+    }
+
+    public void setCoinWebsite(String coinWebsite) {
+        this.coinWebsite = coinWebsite;
     }
 }
