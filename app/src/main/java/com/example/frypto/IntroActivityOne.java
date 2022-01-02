@@ -8,6 +8,9 @@ import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+
+import com.squareup.picasso.Picasso;
 
 public class IntroActivityOne extends AppCompatActivity {
 
@@ -29,6 +32,7 @@ public class IntroActivityOne extends AppCompatActivity {
         ad.setEnterFadeDuration(1500);
         ad.setExitFadeDuration(3000);
         ad.start();
+
 
         nextButton = findViewById(R.id.nextButton);
 
