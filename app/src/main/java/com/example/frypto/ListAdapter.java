@@ -50,9 +50,11 @@ public class ListAdapter extends ArrayAdapter<Coin> {
         coinSymbol.setText("[ "+coin.getCoinSymbol()+" ]");
         coinPrice.setText(df.format(d)+ "$");
         coinMC.setText(coin.getCoinMC());
-        coinPriceChange.setText(coin.getCoinPriceChange());
         if (coin.getCoinPriceChange().contains("-")) {
             coinPriceChange.setTextColor(0xFFF44336);
+            coinPriceChange.setText("-"+coin.getCoinPriceChange());
+        } else {
+            coinPriceChange.setText("+"+coin.getCoinPriceChange());
         }
 
         return super.getView(position, convertView, parent);
