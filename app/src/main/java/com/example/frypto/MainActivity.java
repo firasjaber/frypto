@@ -2,9 +2,11 @@ package com.example.frypto;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -23,8 +25,9 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
 
     ListView superListView;
-
+    Button refreshButton;
     ActivityMainBinding binding;
+    ArrayList<Coin> coinsList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,25 @@ public class MainActivity extends AppCompatActivity {
         getSuperHeroes();
 
         superListView = findViewById(R.id.coinsList);
+        refreshButton = findViewById(R.id.refresh);
+        refreshButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                getSuperHeroes();
+            }
+        });
+
+        superListView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> adapter, View v, int position,
+                                    long arg3)
+            {
+                Intent i = new Intent(MainActivity.this,CoinActivity.class);
+                String coinName = coinsList.get(position).getCoinName();
+                i.putExtra("name",coinName);
+                startActivity(i);
+            }
+        });
 
     }
 
@@ -43,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Results> call, Response<Results> response) {
                 Results result = response.body();
-                ArrayList<Coin> coinsList = result.getCoins();
+                coinsList = result.getCoins();
                 ListAdapter listAdapter = new ListAdapter(MainActivity.this,coinsList);
                 superListView.setAdapter(listAdapter);
             }

@@ -37,12 +37,12 @@ public class ListAdapter extends ArrayAdapter<Coin> {
 
         TextView c = convertView.findViewById(R.id.coin);
         c.setVisibility(convertView.INVISIBLE);
-
+        System.out.println(coin.getCoinIcon());
         int price = (int) Float.parseFloat(coin.getCoinPrice());
 
         Picasso.get().load(coin.getCoinIcon()).into(imageView);
         coinName.setText(coin.getCoinName());
-        coinSymbol.setText(coin.getCoinSymbol());
+        coinSymbol.setText("[ "+coin.getCoinSymbol()+" ]");
         coinPrice.setText(Integer.toString(price)+ "$");
 
         return super.getView(position, convertView, parent);

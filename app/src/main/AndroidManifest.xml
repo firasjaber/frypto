@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.frypto">
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -11,13 +12,27 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Frypto">
         <activity
-            android:name=".MainActivity"
-            android:exported="true">
+            android:name=".IntroActivityThree"
+            android:exported="true" />
+        <activity
+            android:name=".IntroActivityTwo"
+            android:exported="true" />
+        <activity
+            android:name=".IntroActivityOne"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".CoinActivity"
+            android:exported="true" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+
         </activity>
     </application>
 
