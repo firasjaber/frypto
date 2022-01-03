@@ -12,7 +12,6 @@ public class CoinActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coin);
 
-
         WebView engine = (WebView) findViewById(R.id.webView);
         String coinName = getIntent().getStringExtra("name");
         engine.getSettings().setJavaScriptEnabled(true);

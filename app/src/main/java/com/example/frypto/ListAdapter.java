@@ -31,7 +31,7 @@ public class ListAdapter extends ArrayAdapter<Coin> {
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_item,parent,false);
         }
-
+        //coin details views
         ImageView imageView = convertView.findViewById(R.id.coinIcon);
         TextView coinName = convertView.findViewById(R.id.coinId);
         TextView coinSymbol = convertView.findViewById(R.id.coinSymbol);
@@ -39,17 +39,21 @@ public class ListAdapter extends ArrayAdapter<Coin> {
         TextView coinMC = convertView.findViewById(R.id.coinMC);
         TextView coinPriceChange = convertView.findViewById(R.id.coinPriceChange);
 
+        //id text field
         TextView c = convertView.findViewById(R.id.coin);
         c.setVisibility(convertView.INVISIBLE);
+
         // price formatting
         Double d = Double.parseDouble(coin.getCoinPrice());
         DecimalFormat df = new DecimalFormat("#.##");
 
+        //details settings in ui
         Picasso.get().load(coin.getCoinIcon()).into(imageView);
         coinName.setText(coin.getCoinName());
         coinSymbol.setText("[ "+coin.getCoinSymbol()+" ]");
         coinPrice.setText(df.format(d)+ "$");
         coinMC.setText(coin.getCoinMC());
+
         if (coin.getCoinPriceChange().contains("-")) {
             coinPriceChange.setTextColor(0xFFF44336);
             coinPriceChange.setText("-"+coin.getCoinPriceChange());

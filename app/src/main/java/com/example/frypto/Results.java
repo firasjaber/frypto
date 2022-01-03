@@ -9,7 +9,6 @@ public class Results {
     @SerializedName("coins")
     private ArrayList<Coin> coins;
 
-
     public Results(ArrayList<Coin> coins) {
         this.coins = coins;
     }

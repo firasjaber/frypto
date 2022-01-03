@@ -32,8 +32,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
-
-    ListView superListView;
+    //Views
+    ListView coinsListView;
     Button refreshButton;
     ActivityMainBinding binding;
     ArrayList<Coin> coinsList;
@@ -42,22 +42,23 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //bindings views
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        getSuperHeroes();
-        superListView = findViewById(R.id.coinsList);
+        coinsListView = findViewById(R.id.coinsList);
         refreshButton = findViewById(R.id.refresh);
         coinsInfo = findViewById(R.id.coinsInfo);
+        registerForContextMenu(coinsListView);
 
+        //api call
+        getCoinsList();
+        //click listeners
         refreshButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                getSuperHeroes();
+                getCoinsList();
             }
         });
-
-        registerForContextMenu(superListView);
-
-        superListView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        coinsListView.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
             public void onItemClick(AdapterView<?> adapter, View v, int position,
@@ -92,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.resetCoins:
                 //hiddenCoins.clear();
-                getSuperHeroes();
+                getCoinsList();
                 return true;
             case R.id.quit:
                 this.finishAffinity();
@@ -118,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.delete:
                 coinsList.remove(info.position);
-                superListView.invalidateViews();
+                coinsListView.invalidateViews();
                 coinsInfo.setText("Your coins ( "+ coinsList.size()+" total )");
                 return true;
             default:
@@ -126,15 +127,15 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void getSuperHeroes() {
-        Call<Results> call = RetrofitClient.getInstance().getMyApi().getsuperHeroes();
+    private void getCoinsList() {
+        Call<Results> call = RetrofitClient.getInstance().getMyApi().getCoinsList();
         call.enqueue(new Callback<Results>() {
             @Override
             public void onResponse(Call<Results> call, Response<Results> response) {
                 Results result = response.body();
                 coinsList = result.getCoins();
                 ListAdapter listAdapter = new ListAdapter(MainActivity.this,coinsList);
-                superListView.setAdapter(listAdapter);
+                coinsListView.setAdapter(listAdapter);
                 coinsInfo.setText("Your coins ( "+ coinsList.size()+" total )");
             }
 
